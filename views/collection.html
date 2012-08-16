@@ -1,0 +1,21 @@
+<h1><%= title %></h1>
+
+<form>
+		<div class="btn-group">
+		  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		    Add Field
+		    <span class="caret"></span>
+		  </a>
+		  <ul class="dropdown-menu">
+		    <li><a href="#">Text</a></li>
+		    <li><a href="#">File</a></li>
+		  </ul>
+		</div>
+
+
+		<input type="submit" class="btn" value="Create" />
+</form>
+
+<% for(var item in items) { %>
+    <li><a href="<%= "/collection/" + collection + items[item].collectionName %>"><%= items[item].collectionName %></a></li>
+<% } %>

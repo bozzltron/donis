@@ -14,11 +14,12 @@ db.open(function(err, p_db) {
 
 
 var app = module.exports = express.createServer();
-
+app.set('db', db);
 // Configuration
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
+  app.set('db', db);
   //app.set('view engine', 'jade');
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -43,14 +44,8 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-app.set('db',db);
-
-var routes = require('./routes')(app);
-
 // Routes
-
-app.get('/', routes.index);
-app.get('/admin', routes.admin);
+var routes = require('./routes')(app, db);
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
