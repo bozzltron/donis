@@ -1,0 +1,46 @@
+<form class="well" id="document-create" action="<%= "/collection/" + collection + "/new" %>">
+	  <h3>New Document</h3>
+	  
+	  <br />
+		
+		<div id="btn-add" class="btn-group">
+		  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		    Add Field
+		    <span class="caret"></span>
+		  </a>
+		  <ul class="dropdown-menu">
+		    <li><a class="add-text-field" href="#">Text</a></li>
+		    <li><a class="add-textarea-field" href="#">Long Text</a></li>
+		    <li><a class="add-file-field" href="#">File</a></li>
+		  </ul>
+		</div>
+
+    <br />
+
+		<input type="submit" class="btn" value="Save" />
+</form>
+
+<script type="text/javascript">
+
+	window.fieldIndex = 0;
+
+	$(document).ready(function(){
+
+		$('.add-text-field').click(function(){
+			$("#btn-add").before('<div class="form-inline"><input id="label-'+ fieldIndex + '" class="input" placeholder="Label" type="text" /><input id="field-'+ fieldIndex + '" class="input" placeholder="Value" type="text" /></div>');
+				window.fieldIndex++;
+		});
+
+		$('.add-textarea-field').click(function(){
+			$("#btn-add").before('<div class="form-inline"><input id="label-'+ fieldIndex + '" class="input" placeholder="Label" type="text" /><textarea id="field-'+ fieldIndex + '" class="input-xlarge" rows="3"></textarea></div>');
+			window.fieldIndex++;
+		});
+
+		$('.add-file-field').click(function(){
+			$("#btn-add").before('<div class="form-inline"><input id="label-'+ fieldIndex + '" class="input" placeholder="Label" type="text" /><input class="input" id="field-'+ fieldIndex + '" placeholder="Value" type="file" /></div>');
+			window.fieldIndex++;
+		});
+
+	});
+
+</script>
