@@ -1,0 +1,10 @@
+<h1>Collection > {{title}}</h1>
+
+<br />
+<a class="btn btn-primary" href="/collection/{{collection}}/new">New Document</a>
+<br />
+<ul>
+{{#each items}}
+    <li><a href="/collection/{{collection}}/{{name}}">{{collectionName}}</a></li>
+{{/each}}
+</ul>

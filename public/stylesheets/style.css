@@ -1,8 +1,20 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+
+.navbar-inner {
+	background-color: #E8C0DD;
+	background-image:none;
 }
 
-a {
-  color: #00B7FF;
+.navbar .brand, .navbar .nav > li > a {
+	color:#111;
+}
+
+.orchid {
+	background:url(/images/orchid-piece.png) no-repeat center 10px;
+	opacity:0.1;
+	position:fixed;
+	top:50px;
+	height:100%;
+	width:100%;
+	display:block;
 }

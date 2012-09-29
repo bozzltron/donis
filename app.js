@@ -5,7 +5,9 @@
 
 var express = require('express'),
     _ = require('underscore'),
-    mongo = require('mongodb');
+    mongo = require('mongodb'),
+    hbs = require('hbs'),
+    store  = new express.session.MemoryStore;
 
 var db = new mongo.Db('donis', new mongo.Server("127.0.0.1", 27017, {}));
 db.open(function(err, p_db) {
@@ -20,21 +22,16 @@ app.set('db', db);
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('db', db);
-  //app.set('view engine', 'jade');
+  app.set('view engine', 'hbs');
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: 'theBestWifeAGuyCouldAskFor', store: store }));
 });
 
-app.register('.html', {
-  compile: function (str, options) {
-    var template = _.template(str);
-    return function (locals) {
-      return template(locals);
-    };
-  }
-});
+hbs.registerPartial('index', 'index');
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
