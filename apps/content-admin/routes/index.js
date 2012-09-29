@@ -5,13 +5,20 @@
 function routes(app, db) {
 
 	app.get('/admin', function(req, res){
+      console.log(req.session);
 
-      // Return the information of a all collections, using the callback format
-      db.collections(function(err, collections) {
+      if(req.session) {
         
-        res.render(__dirname + '/../views/admin.hbs', { title: 'Admin', items:collections });
-        
-      });
+        // Return the information of a all collections, using the callback format
+        db.collections(function(err, collections) {
+          
+          res.render(__dirname + '/../views/admin.hbs', { title: 'Admin', items:collections });
+          
+        });
+
+      } else {
+        res.render(__dirname + '/../views/login.hbs', { title: 'Login' });
+      }
 
   });		
 
@@ -21,7 +28,7 @@ function routes(app, db) {
       db.collection(req.params.name, function(err, collection) {
 
       	collection.find().toArray(function(err, items) {
-          res.render(__dirname + '/../views/collection.html', { title: req.params.name, collection:req.params.name, items:items });
+          res.render(__dirname + '/../views/collection.hbs', { title: req.params.name, collection:req.params.name, items:items });
         });
         
         
@@ -31,7 +38,7 @@ function routes(app, db) {
 
   app.get('/collection/:name/new', function(req, res){
       
-    res.render(__dirname + '/../views/new.html', { title: req.params.name, collection:req.params.name });
+    res.render(__dirname + '/../views/new.hbs', { title: req.params.name, collection:req.params.name });
 
   }); 
 
