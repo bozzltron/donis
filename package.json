@@ -1,13 +1,14 @@
 {
-  "name": "application-name",
+  "name": "my-doula-donis",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "node app"
+  },
   "dependencies": {
-    "express": "~2.5.8",
-    "jade": ">= 0.0.1",
-    "node-dev": "~0.2.6",
-    "underscore": "~1.3.3",
+    "express": "3.0.0rc4",
+    "jade": "*",
     "mongodb": "~1.1.4",
-    "hbs": "~1.0.5"
+    "hbs": "~1.0.5"    
   }
 }

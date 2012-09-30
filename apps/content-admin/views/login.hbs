@@ -1,15 +1,15 @@
 <h1>{{title}}</h2><br />
-<form class="form-horizontal" action="/login">
+<form class="form-horizontal" action="/admin" method="post">
   <div class="control-group">
     <label class="control-label" for="inputEmail">Username</label>
     <div class="controls">
-      <input type="text" id="inputEmail" placeholder="Username">
+      <input type="text" name="username" id="inputEmail" placeholder="Username">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputPassword">Password</label>
     <div class="controls">
-      <input type="password" id="inputPassword" placeholder="Password">
+      <input type="password" name="password" id="inputPassword" placeholder="Password">
     </div>
   </div>
   <div class="control-group">
