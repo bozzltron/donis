@@ -3,26 +3,38 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-    mongo = require('mongodb'),
-    hbs = require('hbs'),
-    app = module.exports = express();
+var express = require('express')
+  , routes = require('./routes')
+  , user = require('./routes/user')
+  , http = require('http')
+  , path = require('path')
+  , mongo = require('mongodb');
 
-// Configuration
+var app = express();
+
 app.configure(function(){
+  app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
-  app.set('db', db);
   app.set('view engine', 'hbs');
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-  app.use(express.cookieParser('Alw@ysHaveAlw@ysWill'));
+  app.use(express.cookieParser('your secret here'));
   app.use(express.session());
+  app.use(app.router);
+  app.use(express.static(path.join(__dirname, 'public')));
 });
+
+app.configure('development', function(){
+  app.use(express.errorHandler());
+});
+
+app.get('/users', user.list);
 
 // Connect to mongo
 var db = new mongo.Db('donis', new mongo.Server("127.0.0.1", 27017, {}));
+app.set('db', db);
 db.open(function(err, p_db) {
   db.emit('connect', db);
 
@@ -45,20 +57,10 @@ function createAdmins(collection){
   // Update the document with an atomic operator
   collection.update({username:'mtbosworth@gmail.com'}, {$set : {username:'mtbosworth@gmail.com', password:'6e4d5d18de1a83c179a3e6981bdf01ac278fb7b8'}}, {upsert:true});
   collection.update({username:'donis.bosworth@gmail.com'}, {$set : {username:'donis.bosworth@gmail.com', password:'6ef819500b8661caf9c326d341d0079a1dcba499'}}, {upsert:true});
-}
-
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-app.configure('production', function(){
-  app.use(express.errorHandler());
-});
-
-// Routes
+} 
 var routes = require('./routes')(app, db);
 var routes = require('./apps/content-admin/routes')(app, db);
-var port = process.env.PORT || 3000;
-app.listen(port, function(){
-  console.log("Express server listening on port %d in %s mode", port, app.settings.env);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
 });

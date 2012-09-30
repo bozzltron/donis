@@ -31,7 +31,6 @@ function routes(app, db) {
               new Error('invalid password')
             } else {
               console.log('and password');
-              console.log(doc);
               return fn(null, doc);
             }
           });            
@@ -76,8 +75,6 @@ function routes(app, db) {
           // Store the user's primary key 
           // in the session store to be retrieved,
           // or in this case the entire user object
-          console.log('req', req);
-          console.log('sesssion',req.session);
           req.session.user = user;
           res.redirect('admin');
     
