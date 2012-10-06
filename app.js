@@ -45,7 +45,11 @@ db.open(function(err, p_db) {
       console.log('error', err);
     } else {
       db.createCollection('users', function(err, collection){
-        createAdmins(collection);
+        if(err) {
+          console.log(err); 
+        } else {
+          createAdmins(collection);
+        }
       });
     }
     
