@@ -7,7 +7,8 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
-  , mongo = require('mongodb');
+  , mongo = require('mongodb')
+  , db;
 
 var app = express();
 
@@ -28,12 +29,20 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
+
+  // Connect to mongo
+  db = new mongo.Db('donis', new mongo.Server("127.0.0.1", 27017, {}));
+});
+
+app.configure('production', function(){
+
+  // Connect to mongo
+  db = mongo.connect('mongodb://mtbosworth@gmail.com:m1d2_a25!:her@alex.mongohq.com:10049/app8043316');
+
 });
 
 app.get('/users', user.list);
 
-// Connect to mongo
-var db = new mongo.Db('donis', new mongo.Server("127.0.0.1", 27017, {}));
 app.set('db', db);
 db.open(function(err, p_db) {
   db.emit('connect', db);
