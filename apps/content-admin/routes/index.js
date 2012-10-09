@@ -10,13 +10,15 @@ function routes(app, db) {
 	  db.collection('content', function(err, collection) {
 
 	    collection.find({}).toArray(function(err, items) {
-	      
-	      items.forEach(function(page, i){
-	      	console.log('registering page', page);
-	      	app.get(page.path, function(req, res){
-	      		res.render(__dirname + '/../views/template.hbs', { title:page.title, body:page.body });
-	      	});
-	      });
+        
+	      if(items) {
+  	      items.forEach(function(page, i){
+  	      	console.log('registering page', page);
+  	      	app.get(page.path, function(req, res){
+  	      		res.render(__dirname + '/../views/template.hbs', { title:page.title, body:page.body });
+  	      	});
+  	      });
+        }
 
 	    });
 	    
