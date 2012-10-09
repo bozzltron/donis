@@ -72,7 +72,9 @@ function createAdmins(collection){
   collection.update({username:'donis.bosworth@gmail.com'}, {$set : {username:'donis.bosworth@gmail.com', password:'6ef819500b8661caf9c326d341d0079a1dcba499'}}, {upsert:true});
 } 
 var routes = require('./routes')(app, db);
-var routes = require('./apps/content-admin/routes')(app, db);
+require('./apps/content-admin/routes')(app, db);
+require('./apps/mongo-admin/routes')(app, db);
+require('./apps/mongo-login/')(app, db);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

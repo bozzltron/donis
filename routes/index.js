@@ -5,7 +5,7 @@
 function routes(app, db) {
 
 	app.get('/', function(req, res){
-	  res.render('index.hbs', { title: 'My Doula Donis' });
+	  res.render('index.hbs', { title: 'My Doula Donis'});
 	});
 
 	app.get('/about', function(req, res){

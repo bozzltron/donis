@@ -53,19 +53,30 @@
               <ul class="nav">
                 <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact</a></li>
+                {{#if loggedIn}}
+                  <li><a href="/content">Content</a></li>
+                {{/if}}
               </ul>
             </div><!--/.nav-collapse -->
           </div>
         </div>
       </div>
 
+      {{#each errors}}
+        <div class="alert alert-error">{{this}}</div>
+      {{/each}}
+
   		{{{ body }}}
 
       <hr>
 
       <footer>
-        <span>&copy; Donis Bosworth <script>document.write(new Date().getFullYear())</script></span>  &nbsp;|&nbsp;  
-        <a href="/admin">Login</a>
+        <span>&copy; Donis Bosworth <script>document.write(new Date().getFullYear())</script></span>  &nbsp;|&nbsp; DONA Certified &nbsp;|&nbsp;
+        {{#if loggedIn}}
+          
+        {{else}}
+          <a href="/login">Login</a>
+        {{/if}}
       </footer>
 
     </div> <!-- /container -->
