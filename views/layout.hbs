@@ -291,7 +291,7 @@
             <div class="form-group">
               <label class="control-label" for="contact-name">Name</label>
               <div class="controls">
-              <input id="contact-name" name="contactName" placeholder="Your name" class="form-control requiredField" data-new-placeholder="Your name" type="text" data-error-empty="Please enter your name">
+              <input id="contact-name" name="name" placeholder="Your name" class="form-control requiredField" data-new-placeholder="Your name" type="text" data-error-empty="Please enter your name">
               <i class="fa fa-user"></i>
               </div>
             </div><!-- End name input -->
@@ -299,7 +299,7 @@
             <div class="form-group">
               <label class="control-label" for="contact-mail">Email</label>
               <div class=" controls">
-              <input id="contact-mail" name="subject" placeholder="Your email" class="form-control requiredField" data-new-placeholder="Your email" type="email" data-error-empty="Please enter your email" data-error-invalid="Invalid email address">
+              <input id="contact-mail" name="email" placeholder="Your email" class="form-control requiredField" data-new-placeholder="Your email" type="email" data-error-empty="Please enter your email" data-error-invalid="Invalid email address">
               <i class="fa fa-envelope"></i>
               </div>
             </div><!-- End email input -->
@@ -312,6 +312,8 @@
               </div>
             </div><!-- End textarea -->
             
+            <input class="hidden-time" type="hidden" name="time" />
+
             <p><button name="submit" type="submit" class="btn btn-color2 btn-block" data-error-message="Error!" data-sending-message="Sending..." data-ok-message="Message Sent"><i class="fa fa-paper-plane"></i>Send Message</button></p>
             <input type="hidden" name="submitted" id="submitted" value="true" />
             
@@ -359,7 +361,10 @@
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="assets/js/contact.js"></script>
     <script src="assets/js/scripts.js"></script>
-    
+    <script>
+      $(".hidden-time").val(new Date().getTime());
+    </script>
+
     <script>
     
       var mapPoint = {
